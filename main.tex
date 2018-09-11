@@ -1,0 +1,166 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Spectral index measurements on redshifted spectra}
+\author{Kyle Westfall}
+
+\begin{document}
+\maketitle
+
+\section{Bandhead indices integrating over $F_\nu$}
+
+D4000 is defined as:
+%
+\begin{equation}
+{\rm D4000} = \frac{\langle F_{\nu,{\rm red}}\rangle}{\langle F_{\nu,{\rm blue}}\rangle}
+\end{equation}
+%
+where
+%
+\begin{equation}
+\langle F_{\nu} \rangle = 
+\left(\int^{\lambda_{2}}_{\lambda_{1}} F_\nu\ d\lambda\right) \cdot \left(\int^{\lambda_{2}}_{\lambda_{1}} d\lambda\right)^{-1}.
+\end{equation}
+%
+The units of $F_{\nu}$ are erg/s/cm$^2$/Hz, meaning that the redshifted flux density are different from the observed flux density, even when accounting for the difference in the wavelength of the observations.  That is,
+%
+\begin{eqnarray}
+F_{\nu,{\rm obs}} & = & F_{\nu,{\rm rest}}\ \frac{\nu_{\rm rest}}{\nu_{\rm obs}} \\
+ & = & F_{\nu,{\rm rest}}\ (1+z)
+ \end{eqnarray}
+%
+If I then also use
+%
+\begin{eqnarray}
+\lambda_{\rm obs} & = & (1+z)\ \lambda_{\rm rest} \\
+d\lambda_{\rm obs} & = & (1+z)\ d\lambda_{\rm rest},
+\end{eqnarray}
+%
+I can rewrite the mean flux per Hz in both the observed and rest frame.  In the observed frame:
+%
+\begin{eqnarray}
+\langle F_{\nu,{\rm obs}} \rangle & = &  
+\left(\int^{\lambda_{2,{\rm obs}}}_{\lambda_{1,{\rm obs}}} F_{\nu,{\rm obs}} d\lambda_{\rm obs}\right) \cdot \left( \int^{\lambda_{2,{\rm obs}}}_{\lambda_{1,{\rm obs}}} d\lambda_{\rm obs} \right)^{-1} \\
+& = &  
+\left( (1+z)^2\ \int^{\lambda_{2,{\rm rest}}}_{\lambda_{1,{\rm rest}}} F_{\nu,{\rm rest}}\ d\lambda_{\rm rest}\right) \cdot \left( (1+z)\ \int^{\lambda_{2,{\rm rest}}}_{\lambda_{1,{\rm rest}}} d\lambda_{\rm rest}\right)^{-1} \\
+& = & (1+z) \langle F_{\nu,{\rm rest}} \rangle,
+\end{eqnarray}
+%
+which is really just a repeat of equation 4.  If all of that makes sense, then it should be that:
+%
+\begin{eqnarray}
+{\rm D4000}_{\rm obs} & = & \frac{\langle F_{\nu,{\rm red,obs}}\rangle}{\langle F_{\nu,{\rm blue,obs}}\rangle} \\
+ & = &  \frac{(1+z)\ \langle F_{\nu,{\rm red,rest}}\rangle}{(1+z)\ \langle F_{\nu,{\rm blue,rest}}\rangle} \\
+ & = & {\rm D4000}_{\rm rest},
+\end{eqnarray}
+%
+as long as I perform the $D4000_{\rm obs}$ measurements with the passbands appropriately redshifted.
+
+\section{Bandhead indices integrating over $F_\lambda$}
+
+The Conroy \& van Dokkum definition of the TiO index is:
+%
+\begin{equation}
+{\rm TiO} = \frac{\langle F_{\lambda,{\rm blue}}\rangle}{\langle F_{\lambda,{\rm red}}\rangle},
+\end{equation}
+%
+where the mean $F_\lambda$ is the same as equation 2 just replacing $F_\nu$ with $F_\lambda$.  Similar to equation 4, I can write:
+%
+\begin{equation}
+F_{\lambda,{\rm obs}} = F_{\lambda,{\rm rest}} / (1+z),
+\end{equation}
+%
+such that
+%
+\begin{eqnarray}
+{\rm TiO}_{\rm obs} & = & \frac{\langle F_{\lambda,{\rm blue,obs}}\rangle}{\langle F_{\lambda,{\rm red,obs}}\rangle} \\
+ & = &  \frac{\langle F_{\lambda,{\rm blue,rest}}\rangle/(1+z)}{\langle F_{\lambda,{\rm red,rest}}\rangle/(1+z)} \\
+ & = & {\rm TiO}_{\rm rest},
+\end{eqnarray}
+%
+as long as I perform the measurements within the redshifted passbands.
+
+\section{Absorption-line indices in magnitudes integrating over $F_\lambda$}
+
+Absorption-line indices that integrate over $F_\lambda$ and are in magnitude units, like CN1, are defined as:
+%
+\begin{equation}
+{\rm CN1} = -2.5 \log\left[ \left( \int^{\lambda_2}_{\lambda_1} \frac{F_\lambda}{C_\lambda} d\lambda \right) \cdot \left(\int^{\lambda_2}_{\lambda_1} d\lambda\right)^{-1} \right],
+\end{equation}
+%
+where $C_\lambda$ is the linear fit to the pseudocontinua on either side of the main band.  The pseudocontinua are measurements of $\langle F_\lambda\rangle$ in a blue and red band such that $C_\lambda = m\lambda + b$ where,
+%
+\begin{eqnarray}
+m & = & (\langle F_{\lambda}\rangle_{\rm red} - \langle F_{\lambda}\rangle_{\rm blue}) (\langle \lambda\rangle_{\rm red} - \langle \lambda\rangle_{\rm blue})^{-1} \\
+b & = & \langle F_{\lambda}\rangle_{\rm blue} - m\ \lambda.
+\end{eqnarray}
+%
+Working through the math then $m_{\rm obs} = m_{\rm rest} (1+z)^{-2}$ and $b_{\rm obs} = b_{\rm rest} (1+z)^{-1}$, such that $C_{\lambda, {\rm obs}} = C_{\lambda, {\rm rest}}  (1+z)^{-1}$, as you would expect.  This means that $F_{\lambda,{\rm obs}}/C_{\lambda,{\rm obs}} = F_{\lambda,{\rm rest}}/C_{\lambda,{\rm rest}}$ such that,
+%
+\begin{eqnarray}
+{\rm CN1}_{\rm obs} & = &  
+-2.5\log\left[ \left(\int^{\lambda_{2,{\rm obs}}}_{\lambda_{1,{\rm obs}}} \frac{F_{\lambda,{\rm obs}}}{C_{\lambda,{\rm obs}}}\ d\lambda_{\rm obs}\right) \cdot \left( \int^{\lambda_{2,{\rm obs}}}_{\lambda_{1,{\rm obs}}} d\lambda_{\rm obs} \right)^{-1} \right] \\
+& = & -2.5\log\left[ \left((1+z) \int^{\lambda_{2,{\rm rest}}}_{\lambda_{1,{\rm rest}}} \frac{F_{\lambda,{\rm rest}}}{C_{\lambda,{\rm rest}}}\ d\lambda_{\rm rest}\right) \cdot \left( (1+z) \int^{\lambda_{2,{\rm rest}}}_{\lambda_{1,{\rm rest}}} d\lambda_{\rm rest} \right)^{-1} \right] \\
+& = & {\rm CN1}_{\rm rest}.
+\end{eqnarray}
+
+\section{Absorption-line indices in \AA\ integrating over $F_\lambda$}
+
+Absorption-line indices, integrating over $F_\lambda$ and in units of \AA, like NaD, are defined as
+%
+\begin{equation}
+{\rm NaD} = \int^{\lambda_2}_{\lambda_1} \left(1 - \frac{F_\lambda}{C_\lambda}\right) d\lambda .
+\end{equation}
+%
+It follows from above then that
+\begin{eqnarray}
+{\rm NaD}_{\rm obs} & = & \int^{\lambda_{2,{\rm obs}}}_{\lambda_{1,{\rm obs}}} \left(1 - \frac{F_{\lambda,{\rm obs}}}{C_{\lambda,{\rm obs}}}\right) d\lambda_{\rm obs} \\
+& = & (1+z) \int^{\lambda_{2,{\rm rest}}}_{\lambda_{1,{\rm rest}}} \left(1 - \frac{F_{\lambda,{\rm rest}}}{C_{\lambda,{\rm rest}}}\right) d\lambda_{\rm rest} \\
+& = & (1+z)\ {\rm NaD}_{\rm rest} .
+\end{eqnarray}
+%
+
+\section{Emission-line equivalent widths in \AA\ integrating over $F_\lambda$}
+
+Emission-line equivalent widths, integrating over $F_\lambda$ and in units of \AA, are defined similarly to absorption-line indices, just with a sign change:
+%
+\begin{equation}
+{\rm EW}_{{\rm H}\alpha} = \int^{\lambda_2}_{\lambda_1} \left(\frac{F_\lambda}{C_\lambda} - 1\right) d\lambda.
+\end{equation}
+%
+However, in detail, the DAP actually measures
+%
+\begin{equation}
+{\rm EW}_{{\rm H}\alpha} = \frac{F_{{\rm H}\alpha}}{C_{\lambda,c}},
+\end{equation}
+%
+where
+%
+\begin{eqnarray}
+F_{{\rm H}\alpha,{\rm obs}} & = & \int^{\lambda_{2,{\rm obs}}}_{\lambda_{1,{\rm obs}}} (F_{\lambda,{\rm obs}} - C_{\lambda,{\rm obs}})\ d\lambda_{\rm obs} \\
+ & = & \int^{\lambda_{2,{\rm rest}}}_{\lambda_{1,{\rm rest}}} (1+z)^{-1}\ (F_{\lambda,{\rm rest}} - C_{\lambda,{\rm rest}})\ (1+z) d\lambda_{\rm rest} \\
+ & = &  F_{{\rm H}\alpha,{\rm rest}}
+\end{eqnarray}
+%
+and $C_{\lambda,c,obs} = C_{\lambda,c,rest}/(1+z)$ is the linear continuum sampled at the center of the emission line.  Therefore,
+%
+\begin{eqnarray}
+{\rm EW}_{{\rm H}\alpha,{\rm obs}} & = & \frac{F_{{\rm H}\alpha,{\rm obs}}}{C_{\lambda,c,{\rm obs}}} \\
+& = & (1+z)\ \frac{F_{{\rm H}\alpha,{\rm rest}}}{C_{\lambda,c,{\rm rest}}} \\
+ & = & (1+z)\ {\rm EW}_{{\rm H}\alpha,{\rm rest}}.
+\end{eqnarray}
+
+\end{document}
